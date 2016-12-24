@@ -1,0 +1,21 @@
+/* rotirati js-om */
+
+.it-intro {
+  transform:rotate3d(0, 10, 0, 30deg);
+}
+
+/* threeJS div */
+
+.three-div{
+    background: #BADA55;
+    color: #E50000;
+    font-family: Arial, Helvetica, Sans-serif;
+    font-size: 2em;
+    padding: 2em;
+}
+
+/* POMAGALA */
+
+.bg-white {
+  background-color: #fff;
+}
