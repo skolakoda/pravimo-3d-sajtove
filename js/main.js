@@ -1,6 +1,5 @@
 const THREE = window.THREE
 import {
-  PerspectiveCamera,
   Mesh,
   TorusGeometry,
   MeshNormalMaterial,
@@ -9,21 +8,10 @@ import {
   HemisphereLight
 } from 'three'
 
+import {Kamera} from './klase/Kamera'
+import {Kontrole} from './klase/Kontrole'
+
 /** * KLASE ***/
-
-function Kamera () {
-  const temp = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000)
-  temp.position.set(0, 0, -1000)
-  return temp
-}
-
-function Kontrole () {
-  const temp = new THREE.OrbitControls(kamera)
-  temp.rotateSpeed = 1.0
-  temp.zoomSpeed = 1.2
-  temp.panSpeed = 0.8
-  return temp
-}
 
 function Geometrija () {
   const temp = new Mesh(
@@ -63,8 +51,8 @@ function Renderer2 () {
 
 /** * INSTANCE ***/
 
-const kamera = Kamera()
-const controls = Kontrole()
+const kamera = new Kamera()
+const controls = new Kontrole(kamera)
 const scena = new Scene()
 const geometrija = Geometrija()
 const svetlo = new HemisphereLight(0xffbf67, 0x15c6ff)
