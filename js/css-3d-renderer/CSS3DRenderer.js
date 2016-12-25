@@ -1,16 +1,16 @@
-const THREE = window.THREE
+import {
+  Matrix4,
+  Math as Math3D
+} from 'three'
 
 import {CSS3DObject} from './CSS3DObject'
-THREE.CSS3DObject = CSS3DObject
-
 import {CSS3DSprite} from './CSS3DSprite'
-THREE.CSS3DSprite = CSS3DSprite
 
 export function CSS3DRenderer () {
   var _width, _height
   var _widthHalf, _heightHalf
 
-  var matrix = new THREE.Matrix4()
+  var matrix = new Matrix4()
 
   var cache = {
     camera: { fov: 0, style: '' },
@@ -110,10 +110,10 @@ export function CSS3DRenderer () {
   }
 
   var renderObject = function (object, camera) {
-    if (object instanceof THREE.CSS3DObject) {
+    if (object instanceof CSS3DObject) {
       var style
 
-      if (object instanceof THREE.CSS3DSprite) {
+      if (object instanceof CSS3DSprite) {
         // http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
 
         matrix.copy(camera.matrixWorldInverse)
@@ -154,7 +154,7 @@ export function CSS3DRenderer () {
   }
 
   this.render = function (scene, camera) {
-    var fov = 0.5 / Math.tan(THREE.Math.degToRad(camera.getEffectiveFOV() * 0.5)) * _height
+    var fov = 0.5 / Math.tan(Math3D.degToRad(camera.getEffectiveFOV() * 0.5)) * _height
 
     if (cache.camera.fov !== fov) {
       domElement.style.WebkitPerspective = fov + 'px'
