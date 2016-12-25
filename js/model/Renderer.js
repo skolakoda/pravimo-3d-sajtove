@@ -5,8 +5,8 @@ export class Renderer extends WebGLRenderer {
     super({
       antialias: true
     })
-    this.setClearColor(0xffffff, 1)
     this.setSize(window.innerWidth, window.innerHeight)
-    this.domElement.style.zIndex = 5
+    this.setClearColor(0xffffff, 1)
+    document.body.appendChild(this.domElement)
   }
 }

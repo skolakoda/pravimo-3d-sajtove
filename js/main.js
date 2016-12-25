@@ -8,59 +8,51 @@ import {Kamera} from './model/Kamera'
 import {Kontrole} from './model/Kontrole'
 import {Geometrija} from './model/Geometrija'
 import {Renderer} from './model/Renderer'
+import {RendererDOM} from './model/RendererDOM'
 
-/** * KLASE ***/
+/** KLASE **/
 
 class DivElement extends THREE.CSS3DObject {
   constructor (paragraf) {
     super(paragraf)
     this.position.x = 0
     this.position.y = 0
-    this.position.z = -185
-    this.rotation.y = Math.PI
+    this.position.z = 0 // -180
+    this.rotation.y = Math.PI // vraca ga u normalu, default je rotirano
   }
 }
 
-class CssRenderer extends THREE.CSS3DRenderer {
-  constructor () {
-    super()
-    this.setSize(window.innerWidth, window.innerHeight)
-    this.domElement.style.position = 'absolute'
-    this.domElement.style.top = 0
-  }
-}
-
-/** * INSTANCE ***/
+/** INSTANCE **/
 
 const kamera = new Kamera()
-const controls = new Kontrole(kamera)
-const scena = new Scene()
+const kontrole = new Kontrole(kamera)
+
+const scena3D = new Scene()
 const geometrija = new Geometrija()
 const svetlo = new HemisphereLight(0xffbf67, 0x15c6ff)
-const renderer = new Renderer()
-const scena2 = new Scene()
+const renderer3D = new Renderer()
+
+const scenaDOM = new Scene()
 const paragraf = document.querySelector('#intro')
 const div = new DivElement(paragraf)
-const cssRenderer = new CssRenderer()
+const rendererDOM = new RendererDOM()
 
-/** * FUNKCIJE ***/
+/** FUNKCIJE **/
 
 function init () {
-  scena.add(geometrija)
-  scena.add(svetlo)
-  document.body.appendChild(renderer.domElement)
-  scena2.add(div)
-  document.body.appendChild(cssRenderer.domElement)
+  scena3D.add(geometrija)
+  scena3D.add(svetlo)
+  scenaDOM.add(div)
 }
 
-function animiraj () {
-  window.requestAnimationFrame(animiraj)
-  controls.update()
-  cssRenderer.render(scena2, kamera)
-  renderer.render(scena, kamera)
+function update () {
+  window.requestAnimationFrame(update)
+  kontrole.update()
+  renderer3D.render(scena3D, kamera)
+  rendererDOM.render(scenaDOM, kamera)
 }
 
-/** * TOK ***/
+/** TOK **/
 
 init()
-animiraj()
+update()
