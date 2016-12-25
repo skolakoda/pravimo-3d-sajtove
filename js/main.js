@@ -1,10 +1,10 @@
 const THREE = window.THREE
-// import {PerspectiveCamera} from 'three'
+import {PerspectiveCamera} from 'three'
 
 /** * KLASE ***/
 
 function Kamera () {
-  const temp = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000)
+  const temp = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000)
   temp.position.set(0, 0, -1000)
   return temp
 }

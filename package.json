@@ -5,13 +5,20 @@
   "description": "Škola koda 3D",
   "main": "main.js",
   "scripts": {
+    "start": "webpack-dev-server --inline --hot",
+    "build": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "three": "^0.83.0",
     "three-orbit-controls": "^82.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-core": "^5.0.0",
+    "babel-loader": "^5.0.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mudroljub/skolakoda-3d.git"
