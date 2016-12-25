@@ -18,3 +18,8 @@ Napomena: Neke ThreeJS biblioteke još uvek nisu prebačene u ES6 (CSS3DRenderer
 * http://jsfiddle.net/MdPrb/7/ (geometrija sa CSS3DRenderer)
 * http://learningthreejs.com/blog/2013/04/30/closing-the-gap-between-html-and-webgl/
 * http://adndevblog.typepad.com/cloud_and_mobile/2015/07/embedding-webpages-in-a-3d-threejs-scene.html
+* https://www.packtpub.com/mapt/book/web-development/9781783980864/6
+
+## TODO
+
+* Objaviti css-3d-renderer kao biblioteku (https://threejs.org/examples/js/renderers/CSS3DRenderer.js)
