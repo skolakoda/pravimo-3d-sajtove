@@ -1,7 +1,7 @@
 const THREE = window.THREE
 
 /**
- * DOM Renderer, pravi prazan div velicine ekrana u kome se renderuju DOM elementi
+ * DOM Renderer, pravi prazan div velicine ekrana u kome se renderuju elementi
  */
 export class DomRenderer extends THREE.CSS3DRenderer {
   constructor () {

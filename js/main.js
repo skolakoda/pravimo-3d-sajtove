@@ -16,27 +16,27 @@ const kamera = new Kamera()
 const kontrole = new Kontrole(kamera)
 
 const scena3D = new Scene()
+const renderer3D = new Renderer()
 const geometrija = new Geometrija()
 const svetlo = new HemisphereLight(0xffbf67, 0x15c6ff)
-const renderer3D = new Renderer()
 
 const scenaDOM = new Scene()
-const div = new DomElement(document.querySelector('#intro'))
 const rendererDOM = new DomRenderer()
+const div = new DomElement(document.querySelector('#intro'))
 
 /** FUNKCIJE **/
 
 function init () {
+  scenaDOM.add(div)
   scena3D.add(geometrija)
   scena3D.add(svetlo)
-  scenaDOM.add(div)
 }
 
 function update () {
   window.requestAnimationFrame(update)
   kontrole.update()
-  renderer3D.render(scena3D, kamera)
   rendererDOM.render(scenaDOM, kamera)
+  renderer3D.render(scena3D, kamera)
 }
 
 /** TOK **/
