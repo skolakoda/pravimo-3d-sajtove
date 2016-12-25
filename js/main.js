@@ -4,10 +4,10 @@ import {
   HemisphereLight
 } from 'three'
 
-import {Kamera} from './klase/Kamera'
-import {Kontrole} from './klase/Kontrole'
-import {Geometrija} from './klase/Geometrija'
-import {Renderer} from './klase/Renderer'
+import {Kamera} from './model/Kamera'
+import {Kontrole} from './model/Kontrole'
+import {Geometrija} from './model/Geometrija'
+import {Renderer} from './model/Renderer'
 
 /** * KLASE ***/
 
