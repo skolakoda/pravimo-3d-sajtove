@@ -3,7 +3,7 @@ const THREE = window.THREE
 /**
  * DOM Renderer, pravi prazan div velicine ekrana u kome se renderuju DOM elementi
  */
-export class RendererDOM extends THREE.CSS3DRenderer {
+export class DomRenderer extends THREE.CSS3DRenderer {
   constructor () {
     super()
     this.setSize(window.innerWidth, window.innerHeight)

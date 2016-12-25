@@ -1,4 +1,3 @@
-const THREE = window.THREE
 import {
   Scene,
   HemisphereLight
@@ -8,19 +7,8 @@ import {Kamera} from './model/Kamera'
 import {Kontrole} from './model/Kontrole'
 import {Geometrija} from './model/Geometrija'
 import {Renderer} from './model/Renderer'
-import {RendererDOM} from './model/RendererDOM'
-
-/** KLASE **/
-
-class DivElement extends THREE.CSS3DObject {
-  constructor (paragraf) {
-    super(paragraf)
-    this.position.x = 0
-    this.position.y = 0
-    this.position.z = 0 // -180
-    this.rotation.y = Math.PI // vraca ga u normalu, default je rotirano
-  }
-}
+import {DomRenderer} from './model/DomRenderer'
+import {DomElement} from './model/DomElement'
 
 /** INSTANCE **/
 
@@ -33,9 +21,8 @@ const svetlo = new HemisphereLight(0xffbf67, 0x15c6ff)
 const renderer3D = new Renderer()
 
 const scenaDOM = new Scene()
-const paragraf = document.querySelector('#intro')
-const div = new DivElement(paragraf)
-const rendererDOM = new RendererDOM()
+const div = new DomElement(document.querySelector('#intro'))
+const rendererDOM = new DomRenderer()
 
 /** FUNKCIJE **/
 
