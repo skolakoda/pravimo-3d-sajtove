@@ -11,21 +11,23 @@ import {Renderer} from './klase/Renderer'
 
 /** * KLASE ***/
 
-function DivElement (paragraf) {
-  const temp = new THREE.CSS3DObject(paragraf)
-  temp.position.x = 0
-  temp.position.y = 0
-  temp.position.z = -185
-  temp.rotation.y = Math.PI
-  return temp
+class DivElement extends THREE.CSS3DObject {
+  constructor (paragraf) {
+    super(paragraf)
+    this.position.x = 0
+    this.position.y = 0
+    this.position.z = -185
+    this.rotation.y = Math.PI
+  }
 }
 
-function Renderer2 () {
-  const temp = new THREE.CSS3DRenderer()
-  temp.setSize(window.innerWidth, window.innerHeight)
-  temp.domElement.style.position = 'absolute'
-  temp.domElement.style.top = 0
-  return temp
+class CssRenderer extends THREE.CSS3DRenderer {
+  constructor () {
+    super()
+    this.setSize(window.innerWidth, window.innerHeight)
+    this.domElement.style.position = 'absolute'
+    this.domElement.style.top = 0
+  }
 }
 
 /** * INSTANCE ***/
@@ -38,8 +40,8 @@ const svetlo = new HemisphereLight(0xffbf67, 0x15c6ff)
 const renderer = new Renderer()
 const scena2 = new Scene()
 const paragraf = document.querySelector('#intro')
-const div = DivElement(paragraf)
-const renderer2 = Renderer2()
+const div = new DivElement(paragraf)
+const cssRenderer = new CssRenderer()
 
 /** * FUNKCIJE ***/
 
@@ -48,14 +50,14 @@ function init () {
   scena.add(svetlo)
   document.body.appendChild(renderer.domElement)
   scena2.add(div)
-  document.body.appendChild(renderer2.domElement)
+  document.body.appendChild(cssRenderer.domElement)
 }
 
 function animiraj () {
   window.requestAnimationFrame(animiraj)
-  renderer2.render(scena2, kamera)
-  renderer.render(scena, kamera)
   controls.update()
+  cssRenderer.render(scena2, kamera)
+  renderer.render(scena, kamera)
 }
 
 /** * TOK ***/
