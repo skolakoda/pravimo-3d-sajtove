@@ -1,5 +1,13 @@
 const THREE = window.THREE
-import {PerspectiveCamera} from 'three'
+import {
+  PerspectiveCamera,
+  Mesh,
+  TorusGeometry,
+  MeshNormalMaterial,
+  WebGLRenderer,
+  Scene,
+  HemisphereLight
+} from 'three'
 
 /** * KLASE ***/
 
@@ -18,16 +26,18 @@ function Kontrole () {
 }
 
 function Geometrija () {
-  const temp = new THREE.Mesh(
-    new THREE.TorusGeometry(120, 60, 40, 40),
-    new THREE.MeshNormalMaterial()
+  const temp = new Mesh(
+    new TorusGeometry(120, 60, 40, 40),
+    new MeshNormalMaterial()
   )
   temp.position.set(0, 0, 0)
   return temp
 }
 
 function Renderer () {
-  const temp = new THREE.WebGLRenderer({ antialias: true })
+  const temp = new WebGLRenderer({
+    antialias: true
+  })
   temp.setClearColor(0xffffff, 1)
   temp.setSize(window.innerWidth, window.innerHeight)
   temp.domElement.style.zIndex = 5
@@ -55,11 +65,11 @@ function Renderer2 () {
 
 const kamera = Kamera()
 const controls = Kontrole()
-const scena = new THREE.Scene()
+const scena = new Scene()
 const geometrija = Geometrija()
-const svetlo = new THREE.HemisphereLight(0xffbf67, 0x15c6ff)
+const svetlo = new HemisphereLight(0xffbf67, 0x15c6ff)
 const renderer = Renderer()
-const scena2 = new THREE.Scene()
+const scena2 = new Scene()
 const paragraf = document.querySelector('#intro')
 const div = DivElement(paragraf)
 const renderer2 = Renderer2()
