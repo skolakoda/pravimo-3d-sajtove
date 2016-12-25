@@ -1,4 +1,5 @@
 const THREE = window.THREE
+// import {PerspectiveCamera} from 'three'
 
 /** * KLASE ***/
 

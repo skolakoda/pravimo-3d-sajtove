@@ -1,20 +1,21 @@
 {
   "name": "skolakoda-3d",
   "version": "1.0.0",
-  "description": "",
+  "author": "mudroljub",
+  "description": "Škola koda 3D",
   "main": "main.js",
-  "dependencies": {
-    "three-orbit-controls": "^82.1.0"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "three": "^0.83.0",
+    "three-orbit-controls": "^82.1.0"
+  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mudroljub/skolakoda-3d.git"
   },
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mudroljub/skolakoda-3d/issues"
