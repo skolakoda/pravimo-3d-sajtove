@@ -1,12 +1,14 @@
-/*** KLASE ***/
+const THREE = window.THREE
 
-function Kamera() {
+/** * KLASE ***/
+
+function Kamera () {
   const temp = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000)
   temp.position.set(0, 0, -1000)
   return temp
 }
 
-function Kontrole() {
+function Kontrole () {
   const temp = new THREE.OrbitControls(kamera)
   temp.rotateSpeed = 1.0
   temp.zoomSpeed = 1.2
@@ -14,7 +16,7 @@ function Kontrole() {
   return temp
 }
 
-function Geometrija() {
+function Geometrija () {
   const temp = new THREE.Mesh(
     new THREE.TorusGeometry(120, 60, 40, 40),
     new THREE.MeshNormalMaterial()
@@ -23,7 +25,7 @@ function Geometrija() {
   return temp
 }
 
-function Renderer() {
+function Renderer () {
   const temp = new THREE.WebGLRenderer({ antialias: true })
   temp.setClearColor(0xffffff, 1)
   temp.setSize(window.innerWidth, window.innerHeight)
@@ -31,14 +33,7 @@ function Renderer() {
   return temp
 }
 
-function TekstElement() {
-  const temp = document.createElement('p')
-  temp.innerHTML = 'Plain text inside a div.'
-  temp.className = 'three-div'
-  return temp
-}
-
-function DivElement(paragraf) {
+function DivElement (paragraf) {
   const temp = new THREE.CSS3DObject(paragraf)
   temp.position.x = 0
   temp.position.y = 0
@@ -47,7 +42,7 @@ function DivElement(paragraf) {
   return temp
 }
 
-function Renderer2() {
+function Renderer2 () {
   const temp = new THREE.CSS3DRenderer()
   temp.setSize(window.innerWidth, window.innerHeight)
   temp.domElement.style.position = 'absolute'
@@ -55,7 +50,7 @@ function Renderer2() {
   return temp
 }
 
-/*** INSTANCE ***/
+/** * INSTANCE ***/
 
 const kamera = Kamera()
 const controls = Kontrole()
@@ -64,28 +59,28 @@ const geometrija = Geometrija()
 const svetlo = new THREE.HemisphereLight(0xffbf67, 0x15c6ff)
 const renderer = Renderer()
 const scena2 = new THREE.Scene()
-const paragraf = TekstElement()
+const paragraf = document.querySelector('#intro')
 const div = DivElement(paragraf)
 const renderer2 = Renderer2()
 
-/*** FUNKCIJE ***/
+/** * FUNKCIJE ***/
 
-function init() {
-    scena.add(geometrija)
-    scena.add(svetlo)
-    document.body.appendChild(renderer.domElement)
-    scena2.add(div)
-    document.body.appendChild(renderer2.domElement)
+function init () {
+  scena.add(geometrija)
+  scena.add(svetlo)
+  document.body.appendChild(renderer.domElement)
+  scena2.add(div)
+  document.body.appendChild(renderer2.domElement)
 }
 
-function animiraj() {
-    requestAnimationFrame(animiraj)
-    renderer2.render(scena2, kamera)
-    renderer.render(scena, kamera)
-    controls.update()
+function animiraj () {
+  window.requestAnimationFrame(animiraj)
+  renderer2.render(scena2, kamera)
+  renderer.render(scena, kamera)
+  controls.update()
 }
 
-/*** TOK ***/
+/** * TOK ***/
 
 init()
 animiraj()
