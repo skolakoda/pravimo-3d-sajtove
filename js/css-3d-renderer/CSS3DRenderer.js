@@ -1,84 +1,17 @@
+import {Math as Math3D} from 'three'
+import {cameraElement} from './elements/camera-element'
+import {domElement} from './elements/dom-element'
+import {getCameraCSSMatrix} from './renderer-helpers'
 import {
-  Matrix4,
-  Math as Math3D
-} from 'three'
-
-import {CSS3DObject} from './CSS3DObject'
-import {CSS3DSprite} from './CSS3DSprite'
-
-import {
-  getCameraCSSMatrix,
-  getObjectCSSMatrix
-} from './renderer-helpers'
-
-const cache = {
-  camera: { fov: 0, style: '' },
-  objects: {}
-}
-const cameraElement = document.createElement('div')
-
-const renderObject = function (object, camera) {
-  if (object instanceof CSS3DObject) {
-    let argument = object.matrixWorld
-
-    if (object instanceof CSS3DSprite) {
-      // http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
-      const matrix = new Matrix4()
-      matrix.copy(camera.matrixWorldInverse)
-      matrix.transpose()
-      matrix.copyPosition(object.matrixWorld)
-      matrix.scale(object.scale)
-
-      matrix.elements[ 3 ] = 0
-      matrix.elements[ 7 ] = 0
-      matrix.elements[ 11 ] = 0
-      matrix.elements[ 15 ] = 1
-
-      argument = matrix
-    }
-
-    const style = getObjectCSSMatrix(argument)
-    const element = object.element
-    const cachedStyle = cache.objects[ object.id ]
-
-    if (cachedStyle === undefined || cachedStyle !== style) {
-      element.style.WebkitTransform = style
-      element.style.MozTransform = style
-      element.style.oTransform = style
-      element.style.transform = style
-
-      cache.objects[ object.id ] = style
-    }
-
-    if (element.parentNode !== cameraElement) {
-      cameraElement.appendChild(element)
-    }
-  }
-
-  for (let i = 0, l = object.children.length; i < l; i++) {
-    renderObject(object.children[ i ], camera)
-  }
-}
+  cache,
+  renderObject
+} from './render-object'
 
 let _width, _height
 let _widthHalf, _heightHalf
 
 export function CSS3DRenderer () {
-  const domElement = document.createElement('div')
-  domElement.style.overflow = 'hidden'
-
-  domElement.style.WebkitTransformStyle = 'preserve-3d'
-  domElement.style.MozTransformStyle = 'preserve-3d'
-  domElement.style.oTransformStyle = 'preserve-3d'
-  domElement.style.transformStyle = 'preserve-3d'
-
   this.domElement = domElement
-
-  cameraElement.style.WebkitTransformStyle = 'preserve-3d'
-  cameraElement.style.MozTransformStyle = 'preserve-3d'
-  cameraElement.style.oTransformStyle = 'preserve-3d'
-  cameraElement.style.transformStyle = 'preserve-3d'
-
   domElement.appendChild(cameraElement)
 
   this.setClearColor = function () {}
