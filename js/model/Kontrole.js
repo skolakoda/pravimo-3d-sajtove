@@ -1,4 +1,4 @@
-const THREE = window.THREE
+import * as THREE from 'three'
 const OrbitControls = require('three-orbit-controls')(THREE)
 
 export class Kontrole extends OrbitControls {
