@@ -6,16 +6,64 @@ import {
 import {CSS3DObject} from './CSS3DObject'
 import {CSS3DSprite} from './CSS3DSprite'
 
+import {
+  getCameraCSSMatrix,
+  getObjectCSSMatrix
+} from './renderer-helpers'
+
+var cache = {
+  camera: { fov: 0, style: '' },
+  objects: {}
+}
+var cameraElement = document.createElement('div')
+
+var renderObject = function (object, camera) {
+  if (object instanceof CSS3DObject) {
+    var style
+
+    if (object instanceof CSS3DSprite) {
+      // http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
+      var matrix = new Matrix4()
+      matrix.copy(camera.matrixWorldInverse)
+      matrix.transpose()
+      matrix.copyPosition(object.matrixWorld)
+      matrix.scale(object.scale)
+
+      matrix.elements[ 3 ] = 0
+      matrix.elements[ 7 ] = 0
+      matrix.elements[ 11 ] = 0
+      matrix.elements[ 15 ] = 1
+
+      style = getObjectCSSMatrix(matrix)
+    } else {
+      style = getObjectCSSMatrix(object.matrixWorld)
+    }
+
+    var element = object.element
+    var cachedStyle = cache.objects[ object.id ]
+
+    if (cachedStyle === undefined || cachedStyle !== style) {
+      element.style.WebkitTransform = style
+      element.style.MozTransform = style
+      element.style.oTransform = style
+      element.style.transform = style
+
+      cache.objects[ object.id ] = style
+    }
+
+    if (element.parentNode !== cameraElement) {
+      cameraElement.appendChild(element)
+    }
+  }
+
+  for (var i = 0, l = object.children.length; i < l; i++) {
+    renderObject(object.children[ i ], camera)
+  }
+}
+
 export function CSS3DRenderer () {
   var _width, _height
   var _widthHalf, _heightHalf
-
-  var matrix = new Matrix4()
-
-  var cache = {
-    camera: { fov: 0, style: '' },
-    objects: {}
-  }
 
   var domElement = document.createElement('div')
   domElement.style.overflow = 'hidden'
@@ -26,8 +74,6 @@ export function CSS3DRenderer () {
   domElement.style.transformStyle = 'preserve-3d'
 
   this.domElement = domElement
-
-  var cameraElement = document.createElement('div')
 
   cameraElement.style.WebkitTransformStyle = 'preserve-3d'
   cameraElement.style.MozTransformStyle = 'preserve-3d'
@@ -57,100 +103,6 @@ export function CSS3DRenderer () {
 
     cameraElement.style.width = width + 'px'
     cameraElement.style.height = height + 'px'
-  }
-
-  var epsilon = function (value) {
-    return Math.abs(value) < Number.EPSILON ? 0 : value
-  }
-
-  var getCameraCSSMatrix = function (matrix) {
-    var elements = matrix.elements
-
-    return 'matrix3d(' +
-      epsilon(elements[ 0 ]) + ',' +
-      epsilon(-elements[ 1 ]) + ',' +
-      epsilon(elements[ 2 ]) + ',' +
-      epsilon(elements[ 3 ]) + ',' +
-      epsilon(elements[ 4 ]) + ',' +
-      epsilon(-elements[ 5 ]) + ',' +
-      epsilon(elements[ 6 ]) + ',' +
-      epsilon(elements[ 7 ]) + ',' +
-      epsilon(elements[ 8 ]) + ',' +
-      epsilon(-elements[ 9 ]) + ',' +
-      epsilon(elements[ 10 ]) + ',' +
-      epsilon(elements[ 11 ]) + ',' +
-      epsilon(elements[ 12 ]) + ',' +
-      epsilon(-elements[ 13 ]) + ',' +
-      epsilon(elements[ 14 ]) + ',' +
-      epsilon(elements[ 15 ]) +
-      ')'
-  }
-
-  var getObjectCSSMatrix = function (matrix) {
-    var elements = matrix.elements
-
-    return 'translate3d(-50%,-50%,0) matrix3d(' +
-      epsilon(elements[ 0 ]) + ',' +
-      epsilon(elements[ 1 ]) + ',' +
-      epsilon(elements[ 2 ]) + ',' +
-      epsilon(elements[ 3 ]) + ',' +
-      epsilon(-elements[ 4 ]) + ',' +
-      epsilon(-elements[ 5 ]) + ',' +
-      epsilon(-elements[ 6 ]) + ',' +
-      epsilon(-elements[ 7 ]) + ',' +
-      epsilon(elements[ 8 ]) + ',' +
-      epsilon(elements[ 9 ]) + ',' +
-      epsilon(elements[ 10 ]) + ',' +
-      epsilon(elements[ 11 ]) + ',' +
-      epsilon(elements[ 12 ]) + ',' +
-      epsilon(elements[ 13 ]) + ',' +
-      epsilon(elements[ 14 ]) + ',' +
-      epsilon(elements[ 15 ]) +
-      ')'
-  }
-
-  var renderObject = function (object, camera) {
-    if (object instanceof CSS3DObject) {
-      var style
-
-      if (object instanceof CSS3DSprite) {
-        // http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
-
-        matrix.copy(camera.matrixWorldInverse)
-        matrix.transpose()
-        matrix.copyPosition(object.matrixWorld)
-        matrix.scale(object.scale)
-
-        matrix.elements[ 3 ] = 0
-        matrix.elements[ 7 ] = 0
-        matrix.elements[ 11 ] = 0
-        matrix.elements[ 15 ] = 1
-
-        style = getObjectCSSMatrix(matrix)
-      } else {
-        style = getObjectCSSMatrix(object.matrixWorld)
-      }
-
-      var element = object.element
-      var cachedStyle = cache.objects[ object.id ]
-
-      if (cachedStyle === undefined || cachedStyle !== style) {
-        element.style.WebkitTransform = style
-        element.style.MozTransform = style
-        element.style.oTransform = style
-        element.style.transform = style
-
-        cache.objects[ object.id ] = style
-      }
-
-      if (element.parentNode !== cameraElement) {
-        cameraElement.appendChild(element)
-      }
-    }
-
-    for (var i = 0, l = object.children.length; i < l; i++) {
-      renderObject(object.children[ i ], camera)
-    }
   }
 
   this.render = function (scene, camera) {
