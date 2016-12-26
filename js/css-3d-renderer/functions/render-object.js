@@ -1,8 +1,8 @@
 import {Matrix4} from 'three'
-import {CSS3DObject} from './CSS3DObject'
-import {CSS3DSprite} from './CSS3DSprite'
+import {CSS3DObject} from '../CSS3DObject'
+import {CSS3DSprite} from '../CSS3DSprite'
+import {cameraElement} from '../elements/camera-element'
 import {getObjectCSSMatrix} from './renderer-helpers'
-import {cameraElement} from './elements/camera-element'
 
 export const cache = {
   camera: { fov: 0, style: '' },

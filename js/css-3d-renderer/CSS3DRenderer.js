@@ -1,11 +1,11 @@
 import {Math as Math3D} from 'three'
 import {cameraElement} from './elements/camera-element'
 import {domElement} from './elements/dom-element'
-import {getCameraCSSMatrix} from './renderer-helpers'
+import {getCameraCSSMatrix} from './functions/renderer-helpers'
 import {
   cache,
   renderObject
-} from './render-object'
+} from './functions/render-object'
 
 let _width, _height
 let _widthHalf, _heightHalf
