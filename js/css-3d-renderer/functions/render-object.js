@@ -1,17 +1,12 @@
 import {Matrix4} from 'three'
 import {CSS3DObject} from '../CSS3DObject'
 import {CSS3DSprite} from '../CSS3DSprite'
-import {cameraElement} from '../elements/camera-element'
+import {cache, cameraElement} from '../shared'
 import {getObjectCSSMatrix} from './renderer-helpers'
-
-export const cache = {
-  camera: { fov: 0, style: '' },
-  objects: {}
-}
 
 export const renderObject = function (object, camera) {
   if (object instanceof CSS3DObject) {
-    let argument = object.matrixWorld
+    let defaultMatrix = object.matrixWorld
 
     if (object instanceof CSS3DSprite) {
       // http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
@@ -26,10 +21,10 @@ export const renderObject = function (object, camera) {
       matrix.elements[ 11 ] = 0
       matrix.elements[ 15 ] = 1
 
-      argument = matrix
+      defaultMatrix = matrix
     }
 
-    const style = getObjectCSSMatrix(argument)
+    const style = getObjectCSSMatrix(defaultMatrix)
     const element = object.element
     const cachedStyle = cache.objects[ object.id ]
 

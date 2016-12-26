@@ -1,19 +1,18 @@
 import {Math as Math3D} from 'three'
-import {cameraElement} from './elements/camera-element'
-import {domElement} from './elements/dom-element'
+import {cache, cameraElement} from './shared'
 import {getCameraCSSMatrix} from './functions/renderer-helpers'
-import {
-  cache,
-  renderObject
-} from './functions/render-object'
+import {renderObject} from './functions/render-object'
 
 let _width, _height
 let _widthHalf, _heightHalf
 
 export class CSS3DRenderer {
+
   constructor () {
-    this.domElement = domElement
-    domElement.appendChild(cameraElement)
+    this.domElement = document.createElement('div')
+    this.domElement.style.overflow = 'hidden'
+    this.domElement.style.transformStyle = 'preserve-3d'
+    this.domElement.appendChild(cameraElement)
   }
 
   getSize () {
@@ -30,8 +29,8 @@ export class CSS3DRenderer {
     _widthHalf = _width / 2
     _heightHalf = _height / 2
 
-    domElement.style.width = width + 'px'
-    domElement.style.height = height + 'px'
+    this.domElement.style.width = width + 'px'
+    this.domElement.style.height = height + 'px'
 
     cameraElement.style.width = width + 'px'
     cameraElement.style.height = height + 'px'
@@ -41,7 +40,7 @@ export class CSS3DRenderer {
     const fov = 0.5 / Math.tan(Math3D.degToRad(camera.getEffectiveFOV() * 0.5)) * _height
 
     if (cache.camera.fov !== fov) {
-      domElement.style.perspective = fov + 'px'
+      this.domElement.style.perspective = fov + 'px'
       cache.camera.fov = fov
     }
 
