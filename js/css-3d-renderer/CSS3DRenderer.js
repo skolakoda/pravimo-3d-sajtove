@@ -10,20 +10,20 @@ import {
 let _width, _height
 let _widthHalf, _heightHalf
 
-export function CSS3DRenderer () {
-  this.domElement = domElement
-  domElement.appendChild(cameraElement)
+export class CSS3DRenderer {
+  constructor () {
+    this.domElement = domElement
+    domElement.appendChild(cameraElement)
+  }
 
-  this.setClearColor = function () {}
-
-  this.getSize = function () {
+  getSize () {
     return {
       width: _width,
       height: _height
     }
   }
 
-  this.setSize = function (width, height) {
+  setSize (width, height) {
     _width = width
     _height = height
 
@@ -37,15 +37,11 @@ export function CSS3DRenderer () {
     cameraElement.style.height = height + 'px'
   }
 
-  this.render = function (scene, camera) {
+  render (scene, camera) {
     const fov = 0.5 / Math.tan(Math3D.degToRad(camera.getEffectiveFOV() * 0.5)) * _height
 
     if (cache.camera.fov !== fov) {
-      domElement.style.WebkitPerspective = fov + 'px'
-      domElement.style.MozPerspective = fov + 'px'
-      domElement.style.oPerspective = fov + 'px'
       domElement.style.perspective = fov + 'px'
-
       cache.camera.fov = fov
     }
 
@@ -59,11 +55,7 @@ export function CSS3DRenderer () {
       ' translate3d(' + _widthHalf + 'px,' + _heightHalf + 'px, 0)'
 
     if (cache.camera.style !== style) {
-      cameraElement.style.WebkitTransform = style
-      cameraElement.style.MozTransform = style
-      cameraElement.style.oTransform = style
       cameraElement.style.transform = style
-
       cache.camera.style = style
     }
 

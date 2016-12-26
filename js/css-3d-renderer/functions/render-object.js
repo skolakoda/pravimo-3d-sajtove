@@ -34,11 +34,7 @@ export const renderObject = function (object, camera) {
     const cachedStyle = cache.objects[ object.id ]
 
     if (cachedStyle === undefined || cachedStyle !== style) {
-      element.style.WebkitTransform = style
-      element.style.MozTransform = style
-      element.style.oTransform = style
       element.style.transform = style
-
       cache.objects[ object.id ] = style
     }
 
