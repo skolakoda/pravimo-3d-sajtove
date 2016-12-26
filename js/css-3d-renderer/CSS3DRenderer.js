@@ -11,19 +11,19 @@ import {
   getObjectCSSMatrix
 } from './renderer-helpers'
 
-var cache = {
+const cache = {
   camera: { fov: 0, style: '' },
   objects: {}
 }
-var cameraElement = document.createElement('div')
+const cameraElement = document.createElement('div')
 
-var renderObject = function (object, camera) {
+const renderObject = function (object, camera) {
   if (object instanceof CSS3DObject) {
-    var style
+    let argument = object.matrixWorld
 
     if (object instanceof CSS3DSprite) {
       // http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
-      var matrix = new Matrix4()
+      const matrix = new Matrix4()
       matrix.copy(camera.matrixWorldInverse)
       matrix.transpose()
       matrix.copyPosition(object.matrixWorld)
@@ -34,13 +34,12 @@ var renderObject = function (object, camera) {
       matrix.elements[ 11 ] = 0
       matrix.elements[ 15 ] = 1
 
-      style = getObjectCSSMatrix(matrix)
-    } else {
-      style = getObjectCSSMatrix(object.matrixWorld)
+      argument = matrix
     }
 
-    var element = object.element
-    var cachedStyle = cache.objects[ object.id ]
+    const style = getObjectCSSMatrix(argument)
+    const element = object.element
+    const cachedStyle = cache.objects[ object.id ]
 
     if (cachedStyle === undefined || cachedStyle !== style) {
       element.style.WebkitTransform = style
@@ -56,16 +55,16 @@ var renderObject = function (object, camera) {
     }
   }
 
-  for (var i = 0, l = object.children.length; i < l; i++) {
+  for (let i = 0, l = object.children.length; i < l; i++) {
     renderObject(object.children[ i ], camera)
   }
 }
 
-export function CSS3DRenderer () {
-  var _width, _height
-  var _widthHalf, _heightHalf
+let _width, _height
+let _widthHalf, _heightHalf
 
-  var domElement = document.createElement('div')
+export function CSS3DRenderer () {
+  const domElement = document.createElement('div')
   domElement.style.overflow = 'hidden'
 
   domElement.style.WebkitTransformStyle = 'preserve-3d'
@@ -106,7 +105,7 @@ export function CSS3DRenderer () {
   }
 
   this.render = function (scene, camera) {
-    var fov = 0.5 / Math.tan(Math3D.degToRad(camera.getEffectiveFOV() * 0.5)) * _height
+    const fov = 0.5 / Math.tan(Math3D.degToRad(camera.getEffectiveFOV() * 0.5)) * _height
 
     if (cache.camera.fov !== fov) {
       domElement.style.WebkitPerspective = fov + 'px'
@@ -123,7 +122,7 @@ export function CSS3DRenderer () {
 
     camera.matrixWorldInverse.getInverse(camera.matrixWorld)
 
-    var style = 'translate3d(0,0,' + fov + 'px)' + getCameraCSSMatrix(camera.matrixWorldInverse) +
+    const style = 'translate3d(0,0,' + fov + 'px)' + getCameraCSSMatrix(camera.matrixWorldInverse) +
       ' translate3d(' + _widthHalf + 'px,' + _heightHalf + 'px, 0)'
 
     if (cache.camera.style !== style) {
