@@ -1,4 +1,4 @@
-# Pravimo 3D sajt
+# ucimo-3d-sajtove
 
 Pravimo 3D sajt, 3D transformišemo DOM.
 
@@ -23,4 +23,3 @@ Napomena: Neke ThreeJS biblioteke još uvek nisu prebačene u ES6 (CSS3DRenderer
 ## TODO
 
 * Objaviti css-3d-renderer kao biblioteku (https://threejs.org/examples/js/renderers/CSS3DRenderer.js)
-# ucimo-3d-sajtove
