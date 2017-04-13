@@ -29,6 +29,10 @@ const kamera = new THREE.PerspectiveCamera()
 kamera.aspect = width / height
 kamera.position.set(0, 0, 2500)
 
+const kontrole = new THREE.OrbitControls(kamera)
+kontrole.minAzimuthAngle = - Math.PI / 2
+kontrole.maxAzimuthAngle = Math.PI / 2
+
 const strana01 = new Frejm(
   1000, 1000,
   new THREE.Vector3(-1050, 0, 400),
@@ -56,8 +60,9 @@ scena.add(strana01, strana02, strana03)
 /** FUNCTIONS **/
 
 function update() {
-  renderer.render(scena, kamera)
   requestAnimationFrame(update)
+  kontrole.update()
+  renderer.render(scena, kamera)
 }
 
 update()
