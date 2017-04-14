@@ -1,21 +1,22 @@
-/* global THREE, TWEEN, dat */
+/* global THREE, TWEEN */
 
-const offscreen = new THREE.Vector3(1000, 0, 1000)
+const width = window.innerWidth
+const height = window.innerHeight
 const currentElements = []
-let newlyAddedElements = []
-let toBeRemovedElements = []
 let positionAndRotation = []
+
+/** INIT **/
 
 const scene = new THREE.Scene()
 
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000)
 camera.position.x = 1200
 camera.position.y = 1200
 camera.position.z = 1200
 camera.lookAt(scene.position)
 
 const renderer = new THREE.CSS3DRenderer()
-renderer.setSize(window.innerWidth, window.innerHeight)
+renderer.setSize(width, height)
 renderer.domElement.style.position = 'absolute'
 renderer.domElement.style.top = 0
 document.body.appendChild(renderer.domElement)
@@ -86,11 +87,8 @@ function updateStructure(geometry, offset) {
   positionAndRotation = getPositionAndRotation(geometry, offset)
   const tweenIn = new TWEEN.Tween({opacity: 0})
   .to({pos: 1.0}, 3000)
-  .easing(TWEEN.Easing.Sinusoidal.InOut)
   .onUpdate(function() {
-    const toSet = this.pos
-    newlyAddedElements.forEach(cssObject => cssObject.element.style.opacity = toSet)
-
+    const percent = this.pos
     currentElements.forEach((cssObject, i) => {
       const currentPos = positionAndRotation[i].currentPos
       const targetPos = positionAndRotation[i].pos
@@ -98,58 +96,24 @@ function updateStructure(geometry, offset) {
       const targetRotation = new THREE.Euler()
       targetRotation.setFromRotationMatrix(positionAndRotation[i].rot)
       if (currentPos) {
-        cssObject.position.x = currentPos.x + (targetPos.x - currentPos.x) * toSet
-        cssObject.position.y = currentPos.y + (targetPos.y - currentPos.y) * toSet
-        cssObject.position.z = currentPos.z + (targetPos.z - currentPos.z) * toSet
-        cssObject.rotation.x = currentRotation.x + (targetRotation.x - currentRotation.x) * toSet
-        cssObject.rotation.y = currentRotation.y + (targetRotation.y - currentRotation.y) * toSet
-        cssObject.rotation.z = currentRotation.z + (targetRotation.z - currentRotation.z) * toSet
+        cssObject.position.x = currentPos.x + (targetPos.x - currentPos.x) * percent
+        cssObject.position.y = currentPos.y + (targetPos.y - currentPos.y) * percent
+        cssObject.position.z = currentPos.z + (targetPos.z - currentPos.z) * percent
+        cssObject.rotation.x = currentRotation.x + (targetRotation.x - currentRotation.x) * percent
+        cssObject.rotation.y = currentRotation.y + (targetRotation.y - currentRotation.y) * percent
+        cssObject.rotation.z = currentRotation.z + (targetRotation.z - currentRotation.z) * percent
       }
     })
   })
   tweenIn.start()
 
-  // some cleanup
-  newlyAddedElements = []
-  toBeRemovedElements = []
-
-  // either move or create the elements
   for (let i = 0; i < positionAndRotation.length; i++) {
-    if (currentElements.length > i) {
-      //  move one of the existing
-      const element = currentElements[i]
-      positionAndRotation[i].currentPos = element.position.clone()
-      positionAndRotation[i].currentRotation = element.rotation.clone()
-    } else {
-      // create a new one
-      const element = createCSS3DObject(i)
-      element.position = offscreen.clone()
-      positionAndRotation[i].currentPos = element.position.clone()
-      positionAndRotation[i].currentRotation = element.rotation.clone()
-      // set initial opacity to 0
-      element.element.style.opacity = 0
-      // add to the array to keep track of
-      currentElements.push(element)
-      newlyAddedElements.push(element)
-      scene.add(element)
-    }
+    const element = createCSS3DObject(i)
+    positionAndRotation[i].currentPos = element.position.clone()
+    positionAndRotation[i].currentRotation = element.rotation.clone()
+    currentElements.push(element)
+    scene.add(element)
   }
-  // finally remove the elements that aren't needed anymore
-  for (let i = positionAndRotation.length; i < currentElements.length; i++) {
-    toBeRemovedElements.push(currentElements[i])
-  }
-  // and remove them from the scene
-  for (let i = 0; i < toBeRemovedElements.length; i++) {
-    scene.remove(currentElements.pop())
-  }
-}
-
-function addControlGui(controlObject) {
-  const gui = new dat.GUI()
-  gui.add(controlObject, 'toCube')
-  gui.add(controlObject, 'toSphere')
-  gui.add(controlObject, 'toCylinder')
-  gui.add(controlObject, 'toPlane')
 }
 
 function render() {
@@ -160,30 +124,15 @@ function render() {
 }
 
 function handleResize() {
-  camera.aspect = window.innerWidth / window.innerHeight
+  camera.aspect = width / height
   camera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setSize(width, height)
 }
 
 /** CALLS **/
 
-const gui = {
-  toCube() {
-    updateStructure(new THREE.BoxGeometry(20, 14, 20, 5, 3, 5), 40)
-  },
-  toCylinder() {
-    updateStructure(new THREE.CylinderGeometry(12, 12, 27, 15, 7, true), 40)
-  },
-  toSphere() {
-    updateStructure(new THREE.SphereGeometry(17, 10, 10), 40)
-  },
-  toPlane() {
-    updateStructure(new THREE.TorusGeometry(20, 10, 8, 10), 25)
-  }
-}
-
-addControlGui(gui)
 updateStructure(new THREE.PlaneGeometry(30, 30, 8, 8), 40)
+// updateStructure(new THREE.CylinderGeometry(12, 12, 27, 15, 7, true), 40)
 render()
 
 window.addEventListener('resize', handleResize, false)
