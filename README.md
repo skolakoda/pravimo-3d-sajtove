@@ -6,7 +6,7 @@ Učimo 3D sajtove, 3D transformišemo DOM.
 
 ## Dokumentacija
 
-Kontrole kamere:
+### Kontrole kamere
 
 ```js
 const kontrole = new THREE.OrbitControls(kamera)
@@ -25,6 +25,8 @@ Ograničava vertikalno:
 kontrole.minPolarAngle = 0
 kontrole.maxPolarAngle = Math.PI
 ```
+
+Napomena: Kontrole ubijaju HTML (ne radi selekcija, input i slično)!
 
 ## Linkovi
 
