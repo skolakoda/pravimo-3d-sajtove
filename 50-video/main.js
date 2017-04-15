@@ -1,154 +1,81 @@
-// standard global variables
-var container, scene, camera, renderer, controls, stats;
-var keyboard = new THREEx.KeyboardState();
+/* global THREE */
 
-// custom global variables
-var video, videoImage, videoImageContext, videoTexture;
+const WIDTH = window.innerWidth,
+  HEIGHT = window.innerHeight
+const VIEW_ANGLE = 50,
+  ASPECT = WIDTH / HEIGHT,
+  NEAR = 1,
+  FAR = 1000
 
-init();
-animate();
+const videoWidth = 480
+const videoHeight = 200
 
-// FUNCTIONS
-function init() {
-  // SCENE
-  scene = new THREE.Scene();
-  // CAMERA
-  var SCREEN_WIDTH = window.innerWidth,
-    SCREEN_HEIGHT = window.innerHeight;
-  var VIEW_ANGLE = 45,
-    ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT,
-    NEAR = 0.1,
-    FAR = 20000;
-  camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-  scene.add(camera);
-  camera.position.set(0, 150, 400);
-  camera.lookAt(scene.position);
-  // RENDERER
-  if (Detector.webgl)
-    renderer = new THREE.WebGLRenderer({
-      antialias: true
-    });
-  else
-    renderer = new THREE.CanvasRenderer();
-  renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-  container = document.getElementById('ThreeJS');
-  container.appendChild(renderer.domElement);
-  // CONTROLS
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
-  // EVENTS
-  THREEx.WindowResize(renderer, camera);
-  THREEx.FullScreen.bindKey({
-    charCode: 'm'.charCodeAt(0)
-  });
-  // STATS
-  stats = new Stats();
-  stats.domElement.style.position = 'absolute';
-  stats.domElement.style.bottom = '0px';
-  stats.domElement.style.zIndex = 100;
-  container.appendChild(stats.domElement);
-  // LIGHT
-  var light = new THREE.PointLight(0xffffff);
-  light.position.set(0, 250, 0);
-  scene.add(light);
-  // FLOOR
-  var floorTexture = new THREE.ImageUtils.loadTexture('images/checkerboard.jpg');
-  floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
-  floorTexture.repeat.set(10, 10);
-  var floorMaterial = new THREE.MeshBasicMaterial({
-    map: floorTexture,
-    side: THREE.DoubleSide
-  });
-  var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
-  var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-  floor.position.y = -0.5;
-  floor.rotation.x = Math.PI / 2;
-  scene.add(floor);
-  // SKYBOX/FOG
-  var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
-  var skyBoxMaterial = new THREE.MeshBasicMaterial({
-    color: 0x9999ff,
-    side: THREE.BackSide
-  });
-  var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
-  // scene.add(skyBox);
-  scene.fog = new THREE.FogExp2(0x9999ff, 0.00025);
+/* INIT */
 
+const scene = new THREE.Scene()
 
-  ///////////
-  // VIDEO //
-  ///////////
+const camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR)
+camera.position.set(10, 20, 200)
 
-  // create the video element
-  video = document.createElement('video');
-  // video.id = 'video';
-  // video.type = ' video/ogg; codecs="theora, vorbis" ';
-  video.src = "video/sintel.ogv";
-  video.load(); // must call after setting/changing source
-  video.play();
+const renderer = new THREE.WebGLRenderer()
+renderer.setSize(WIDTH, HEIGHT)
+document.getElementById('root').appendChild(renderer.domElement)
 
-  videoImage = document.createElement('canvas');
-  videoImage.width = 480;
-  videoImage.height = 204;
+const controls = new THREE.OrbitControls(camera, renderer.domElement)
 
-  videoImageContext = videoImage.getContext('2d');
-  // background color if no video present
-  videoImageContext.fillStyle = '#000000';
-  videoImageContext.fillRect(0, 0, videoImage.width, videoImage.height);
+const floorTexture = new THREE.ImageUtils.loadTexture('lava.jpg')
+floorTexture.repeat.set(5, 5)
+floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
 
-  videoTexture = new THREE.Texture(videoImage);
-  videoTexture.minFilter = THREE.LinearFilter;
-  videoTexture.magFilter = THREE.LinearFilter;
+const floorMaterial = new THREE.MeshBasicMaterial({
+  map: floorTexture,
+  side: THREE.DoubleSide
+})
 
-  var movieMaterial = new THREE.MeshBasicMaterial({
-    map: videoTexture,
-    overdraw: true,
-    side: THREE.DoubleSide
-  });
-  // the geometry on which the movie will be displayed;
-  // 		movie image will be scaled to fit these dimensions.
-  var movieGeometry = new THREE.PlaneGeometry(240, 100, 4, 4);
-  var movieScreen = new THREE.Mesh(movieGeometry, movieMaterial);
-  movieScreen.position.set(0, 50, 0);
-  scene.add(movieScreen);
+const floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10)
+const floor = new THREE.Mesh(floorGeometry, floorMaterial)
+floor.rotation.x = Math.PI / 2
+floor.position.y = -25
 
-  camera.position.set(0, 150, 300);
-  camera.lookAt(movieScreen.position);
+const video = document.createElement('video')
+video.src = 'video/sintel.ogv'
+video.load()
+video.play()
 
+const videoCanvas = document.createElement('canvas')
+videoCanvas.width = videoWidth
+videoCanvas.height = videoHeight
+const videoCanvasContext = videoCanvas.getContext('2d')
 
-}
+const videoTexture = new THREE.Texture(videoCanvas)
+const movieMaterial = new THREE.MeshBasicMaterial({
+  map: videoTexture,
+  overdraw: true,
+  side: THREE.DoubleSide
+})
+const movieGeometry = new THREE.PlaneGeometry(videoWidth / 2, videoHeight / 2, 0, 0)
+const movieScreen = new THREE.Mesh(movieGeometry, movieMaterial)
+movieScreen.position.y = 25
 
-function animate() {
-  requestAnimationFrame(animate);
-  render();
-  update();
+scene.add(camera)
+scene.add(floor)
+scene.add(movieScreen)
+
+/* FUNCTIONS */
+
+function playVideo() {
+  if (video.readyState !== video.HAVE_ENOUGH_DATA) return
+  videoCanvasContext.drawImage(video, 0, 0)
+  if (videoTexture) videoTexture.needsUpdate = true
 }
 
 function update() {
-  if (keyboard.pressed("p"))
-    video.play();
-
-  if (keyboard.pressed("space"))
-    video.pause();
-
-  if (keyboard.pressed("s")) // stop video
-  {
-    video.pause();
-    video.currentTime = 0;
-  }
-
-  if (keyboard.pressed("r")) // rewind video
-    video.currentTime = 0;
-
-  controls.update();
-  stats.update();
+  requestAnimationFrame(update)
+  playVideo()
+  controls.update()
+  renderer.render(scene, camera)
 }
 
-function render() {
-  if (video.readyState === video.HAVE_ENOUGH_DATA) {
-    videoImageContext.drawImage(video, 0, 0);
-    if (videoTexture)
-      videoTexture.needsUpdate = true;
-  }
+/* EXEC */
 
-  renderer.render(scene, camera);
-}
+update()
