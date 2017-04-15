@@ -23,7 +23,7 @@ document.getElementById('root').appendChild(renderer.domElement)
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement)
 
-const floorTexture = new THREE.ImageUtils.loadTexture('lava.jpg')
+const floorTexture = new THREE.ImageUtils.loadTexture('assets/lava.jpg')
 floorTexture.repeat.set(5, 5)
 floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
 
@@ -38,7 +38,7 @@ floor.rotation.x = Math.PI / 2
 floor.position.y = -25
 
 const video = document.createElement('video')
-video.src = 'video/sintel.ogv'
+video.src = 'assets/sintel.ogv'
 video.load()
 video.play()
 

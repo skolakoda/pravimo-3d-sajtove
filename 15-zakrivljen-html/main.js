@@ -1,41 +1,24 @@
-
-const string = '<div>' +
-        '<h1>This is an H1 Element.</h1>' +
-        '<span class="large">Hello Essential Three.js</span>' +
-        '<textarea> And this is a textarea</textarea>' +
-        '</div>'
+/* global THREE */
 
 const scene = new THREE.Scene()
 
 const renderer = new THREE.CSS3DRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
-renderer.domElement.style.position = 'absolute'
-renderer.domElement.style.top = 0
 document.body.appendChild(renderer.domElement)
 
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000)
-camera.position.x = 500
-camera.position.y = 500
-camera.position.z = 500
+const camera = new THREE.PerspectiveCamera()
+camera.position.set(279, 136, 500)
 camera.lookAt(scene.position)
+const kontrole = new THREE.OrbitControls(camera)
 
-const clone = createCSS3DObject(string)
-clone.position.set(100, 100, 100)
-scene.add(clone)
+const div = document.querySelector('#page')
 
-function createCSS3DObject(s) {
-  const div = document.createElement('div')
-  div.innerHTML = s
-  div.style.width = '370px'
-  div.style.height = '370px'
-  div.style.opacity = 0.7
-  div.style.background = new THREE.Color(Math.random() * 0xffffff).getStyle()
-  const object = new THREE.CSS3DObject(div)
-  return object
-}
+const object = new THREE.CSS3DObject(div)
+scene.add(object)
 
 function render() {
   requestAnimationFrame(render)
+  kontrole.update()
   renderer.render(scene, camera)
 }
 

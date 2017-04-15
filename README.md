@@ -1,10 +1,30 @@
-# ucimo-3d-sajtove
+# Učimo 3D sajtove
 
-Pravimo 3D sajt, 3D transformišemo DOM.
+Učimo 3D sajtove, 3D transformišemo DOM.
 
-ThreeJS and its CSS3DRenderer infinitely simplify managing 3D animations of HTML elements.
+`Three.js` i njegov `CSS3DRenderer` su neviđeno olakšali 3D transformacije HTML elemenata.
 
-Tutorijal: https://jeanlescure.io/blog/threejs-and-css-3d-transforms/
+## Dokumentacija
+
+Kontrole kamere:
+
+```js
+const kontrole = new THREE.OrbitControls(kamera)
+```
+
+Ograničava horizontalno (mora u intervalu od `-Math.PI` od `Math.PI`):
+
+```js
+kontrole.minAzimuthAngle = - Math.PI / 2
+kontrole.maxAzimuthAngle = Math.PI / 2
+```
+
+Ograničava vertikalno:
+
+```js
+kontrole.minPolarAngle = 0
+kontrole.maxPolarAngle = Math.PI
+```
 
 ## Linkovi
 
