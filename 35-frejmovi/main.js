@@ -7,12 +7,8 @@ class Frejm extends THREE.CSS3DObject {
     iframe.width = width
     iframe.height = height
     super(iframe)
-    this.position.x = position.x
-    this.position.y = position.y
-    this.position.z = position.z
-    this.rotation.x = rotation.x
-    this.rotation.y = rotation.y
-    this.rotation.z = rotation.z
+    Object.assign(this.position, position)
+    Object.assign(this.rotation, rotation)
   }
 }
 
