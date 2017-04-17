@@ -1,8 +1,9 @@
 # Učimo 3D sajtove
 
-Učimo 3D sajtove, 3D transformišemo DOM.
+Pravimo 3D sajtove, 3D transformišemo DOM. `Three.js` i `CSS3DRenderer` su neviđeno olakšali 3D transformacije stranica.
 
-`Three.js` i njegov `CSS3DRenderer` su neviđeno olakšali 3D transformacije HTML elemenata.
+Pogledaj primere na:
+http://skolakoda.org/ucimo-3d-sajtove/
 
 ## Dokumentacija
 
