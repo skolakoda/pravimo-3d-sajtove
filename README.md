@@ -15,8 +15,8 @@ const kontrole = new THREE.OrbitControls(kamera)
 Ograničava horizontalno (mora u intervalu od `-Math.PI` od `Math.PI`):
 
 ```js
-kontrole.minAzimuthAngle = - Math.PI / 2
-kontrole.maxAzimuthAngle = Math.PI / 2
+kontrole.minAzimuthAngle = - Math.PI
+kontrole.maxAzimuthAngle = Math.PI
 ```
 
 Ograničava vertikalno:

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Frejmovi</title>
+  <style>
+    body {
+      margin: 0;
+      /*overflow: hidden;*/
+    }
+    #renderer {
+      position: relative;
+    }
+    .logo {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 class="logo">Škola koda</h1>
+
+  <div id="renderer"></div>
+
+  <script src="https://rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
+  <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
+  <script src="../libs/OrbitControls.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
