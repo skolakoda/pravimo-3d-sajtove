@@ -72,7 +72,7 @@ const camera = new THREE.PerspectiveCamera(
   window.innerWidth / window.innerHeight,
   1,
   10000)
-camera.position.set(0, 100, 2600)
+camera.position.set(708, 2, 2503)
 
 const controls = new THREE.OrbitControls(camera)
 controls.maxPolarAngle = Math.PI / 2
@@ -94,7 +94,7 @@ const directionalLight = new THREE.DirectionalLight(0xffffff)
 directionalLight.position.set(-.5, .5, -1.5).normalize()
 glScene.add(directionalLight)
 
-/* FUNCTIONS */
+// PRAVI FREJMOVE
 
 function create3dPage(w, h, position, rotation, url) {
   const plane = new Plane(w, h, position, rotation)
@@ -102,15 +102,6 @@ function create3dPage(w, h, position, rotation, url) {
   glScene.add(plane)
   cssScene.add(cssObject)
 }
-
-function update() {
-  controls.update()
-  glRenderer.render(glScene, camera)
-  cssRenderer.render(cssScene, camera)
-  requestAnimationFrame(update)
-}
-
-/* EXEC */
 
 create3dPage(
   1000, 1000,
@@ -163,5 +154,14 @@ mesh3.position.x = 500
 mesh3.position.y = -300
 mesh3.position.z = 400
 glScene.add(mesh3)
+
+/* FUNCTIONS */
+
+function update() {
+  controls.update()
+  glRenderer.render(glScene, camera)
+  cssRenderer.render(cssScene, camera)
+  requestAnimationFrame(update)
+}
 
 update()

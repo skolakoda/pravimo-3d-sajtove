@@ -15,7 +15,7 @@ const videoHeight = 200
 const scene = new THREE.Scene()
 
 const camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR)
-camera.position.set(10, 20, 200)
+camera.position.set(58, 27, 190)
 
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(WIDTH, HEIGHT)
