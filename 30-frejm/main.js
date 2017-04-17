@@ -33,7 +33,7 @@ const controls = new THREE.OrbitControls(camera, renderer.domElement)
 
 // FLOOR
 
-const floorTexture = new THREE.ImageUtils.loadTexture('kamen.jpg')
+const floorTexture = new THREE.ImageUtils.loadTexture('../assets/kamen.jpg')
 floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping
 floorTexture.repeat.set(10, 10)
 

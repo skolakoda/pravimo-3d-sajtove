@@ -1,9 +1,8 @@
 /* global THREE */
 
-// ograniciti kameru
-// staviti pod
-
 const bojaPozadine = 0xECF8FF
+const visinaStrane = 1000
+const visinaPredmeta = 200
 
 /* KLASE */
 
@@ -54,11 +53,17 @@ class WebGLRenderer extends THREE.WebGLRenderer {
 
 /* INIT */
 
+const glScene = new THREE.Scene()
+const cssScene = new THREE.Scene()
+
+const glRenderer = new WebGLRenderer()
+const cssRenderer = new CSS3DRenderer()
+
 const camera = new THREE.PerspectiveCamera(
   45,
   window.innerWidth / window.innerHeight,
   1,
-  5000)
+  10000)
 camera.aspect = window.innerWidth / window.innerHeight
 camera.position.set(708, 2, 2503)
 
@@ -66,47 +71,45 @@ const controls = new THREE.OrbitControls(camera)
 controls.maxPolarAngle = Math.PI / 2
 controls.minPolarAngle = Math.PI / 2 - 0.3
 
-const glRenderer = new WebGLRenderer()
-const cssRenderer = new CSS3DRenderer()
-
-const glScene = new THREE.Scene()
-const cssScene = new THREE.Scene()
-
-const ambientLight = new THREE.AmbientLight(0x555555)
-const directionalLight = new THREE.DirectionalLight(0xffffff)
-directionalLight.position.set(-.5, .5, -1.5).normalize()
-
-const kupa = new THREE.Mesh(
-  new THREE.CylinderGeometry(0, 200, 300, 20, 4),
-  new THREE.MeshNormalMaterial()
-)
-kupa.position.set(0, -300, 400)
+// GEOMETRIJA
 
 const kocka = new THREE.Mesh(
-  new THREE.BoxGeometry(200, 200, 200),
+  new THREE.BoxGeometry(visinaPredmeta, visinaPredmeta, visinaPredmeta),
   new THREE.MeshNormalMaterial()
 )
-kocka.position.set(-300, -300, 400)
+kocka.position.set(-400, -visinaStrane / 2 + visinaPredmeta / 2, 400)
+
+const kupa = new THREE.Mesh(
+  new THREE.CylinderGeometry(0, visinaPredmeta, 300, 20, 4),
+  new THREE.MeshNormalMaterial()
+)
+kupa.position.set(0, -visinaStrane / 2 + visinaPredmeta / 2, 400)
 
 const lopta = new THREE.Mesh(
-  new THREE.SphereGeometry(100, 128, 128),
+  new THREE.SphereGeometry(visinaPredmeta / 2, 128, 128),
   new THREE.MeshNormalMaterial()
 )
-lopta.position.set(500, -300, 400)
+lopta.position.set(400, -visinaStrane / 2 + visinaPredmeta / 2, 400)
 
-/* ADD */
+const texture = new THREE.ImageUtils.loadTexture('../assets/kamen.jpg')
+texture.repeat.set(5, 5)
+texture.wrapS = texture.wrapT = THREE.RepeatWrapping
 
-glScene.add(kupa)
-glScene.add(kocka)
-glScene.add(lopta)
-glScene.add(ambientLight)
-glScene.add(directionalLight)
-
-document.querySelector('#renderer')
-  .appendChild(cssRenderer.domElement)
-  .appendChild(glRenderer.domElement)
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(3500, 3500),
+  new THREE.MeshBasicMaterial({map: texture})
+)
+floor.rotation.x = -Math.PI / 2
+floor.position.set(0, -visinaStrane / 2, 0)
 
 /* FUNCTIONS */
+
+function add3dPage(w, h, position, rotation, url) {
+  const wall = new Wall(w, h, position, rotation)
+  const cssObject = new Frame(w, h, position, rotation, url)
+  glScene.add(wall)
+  cssScene.add(cssObject)
+}
 
 function update() {
   controls.update()
@@ -115,31 +118,38 @@ function update() {
   requestAnimationFrame(update)
 }
 
-function create3dPage(w, h, position, rotation, url) {
-  const wall = new Wall(w, h, position, rotation)
-  const cssObject = new Frame(w, h, position, rotation, url)
-  glScene.add(wall)
-  cssScene.add(cssObject)
-}
+/* ADD */
 
-/* EXEC */
+glScene.add(kupa)
+glScene.add(kocka)
+glScene.add(lopta)
+glScene.add(floor)
 
-create3dPage(
-  1000, 1000,
+document.querySelector('#renderer')
+  .appendChild(cssRenderer.domElement)
+  .appendChild(glRenderer.domElement)
+
+add3dPage(
+  visinaStrane, visinaStrane,
   new THREE.Vector3(-1050, 0, 400),
   new THREE.Vector3(0, 45 * Math.PI / 180, 0),
-  'http://skolakoda.org/')
+  'http://skolakoda.org/'
+)
 
-create3dPage(
-  900, 1000,
+add3dPage(
+  visinaStrane, visinaStrane,
   new THREE.Vector3(0, 0, 0),
   new THREE.Vector3(0, 0, 0),
-  'http://skolakoda.org/')
+  'http://skolakoda.org/'
+)
 
-create3dPage(
-  1000, 1000,
+add3dPage(
+  visinaStrane, visinaStrane,
   new THREE.Vector3(1050, 0, 400),
   new THREE.Vector3(0, -45 * Math.PI / 180, 0),
-  'http://skolakoda.org/')
+  'http://skolakoda.org/'
+)
+
+/* EXEC */
 
 update()
