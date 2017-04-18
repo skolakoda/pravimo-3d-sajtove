@@ -1,5 +1,7 @@
 /* global THREE */
 
+// http://adndevblog.typepad.com/cloud_and_mobile/2015/07/embedding-webpages-in-a-3d-threejs-scene.html
+
 const bojaPozadine = 0xECF8FF
 const visinaStrane = 1000
 const visinaPredmeta = 200
