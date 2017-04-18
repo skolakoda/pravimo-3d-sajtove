@@ -32,6 +32,6 @@ Napomena: Kontrole ubijaju HTML (ne radi selekcija, input i slično)!
 ## Linkovi
 
 * http://jsfiddle.net/MdPrb/7/ (geometrija sa CSS3DRenderer)
-* http://learningthreejs.com/blog/2013/04/30/closing-the-gap-between-html-and-webgl/
+* https://threejs.org/examples/#css3d_panorama
 * http://adndevblog.typepad.com/cloud_and_mobile/2015/07/embedding-webpages-in-a-3d-threejs-scene.html
 * https://www.packtpub.com/mapt/book/web-development/9781783980864/6
