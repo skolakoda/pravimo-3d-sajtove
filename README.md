@@ -33,5 +33,4 @@ Napomena: Kontrole ubijaju HTML (ne radi selekcija, input i slično)!
 
 * http://jsfiddle.net/MdPrb/7/ (geometrija sa CSS3DRenderer)
 * https://threejs.org/examples/#css3d_panorama
-* http://adndevblog.typepad.com/cloud_and_mobile/2015/07/embedding-webpages-in-a-3d-threejs-scene.html
 * https://www.packtpub.com/mapt/book/web-development/9781783980864/6
