@@ -1,6 +1,6 @@
 # Učimo 3D sajtove
 
-Pravimo 3D sajtove, 3D transformišemo DOM. `Three.js` i `CSS3DRenderer` su neviđeno olakšali 3D transformacije stranica.
+Pravimo 3D sajtove, 3D transformišemo DOM, uz pomoć `Three.js` biblioteke i `CSS3DRenderer`-a.
 
 ## Primeri
 

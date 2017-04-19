@@ -3,6 +3,15 @@
 const width = window.innerWidth
 const height = window.innerHeight
 
+class ImgObject extends THREE.CSS3DObject {
+  constructor(pos) {
+    const img = document.createElement('img')
+    img.src = `http://lorempixel.com/140/140?${Math.random()}`
+    super(img)
+    this.position = pos
+  }
+}
+
 /** INIT **/
 
 const scene = new THREE.Scene()
@@ -18,12 +27,6 @@ const controls = new THREE.OrbitControls(camera, renderer.domElement)
 controls.autoRotate = true
 
 /** FUNCTIONS **/
-
-function createImgObject(i) {
-  const img = document.createElement('img')
-  img.src = `http://lorempixel.com/140/140?${i}`  // zbog keširanja
-  return new THREE.CSS3DObject(img)
-}
 
 function getVertices(geometry, offset) {
   const result = []
@@ -52,11 +55,6 @@ function update() {
 /** EXEC **/
 
 const vertices = getVertices(new THREE.PlaneGeometry(30, 30, 8, 8), 40)
-
-vertices.map((v, i) => {
-  const imageObj = createImgObject(i)
-  imageObj.position = vertices[i].pos
-  scene.add(imageObj)
-})
+vertices.map(v => scene.add(new ImgObject(v.pos)))
 
 update()
