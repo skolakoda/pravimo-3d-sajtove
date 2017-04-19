@@ -9,9 +9,9 @@ Pravimo 3D sajtove, 3D transformišemo DOM. `Three.js` i `CSS3DRenderer` su nevi
 - [3d strane](http://skolakoda.org/ucimo-3d-sajtove/18-3d-strane/) (sa kontrolama)
 - [3d geometrija](http://skolakoda.org/ucimo-3d-sajtove/20-3d-geometrija/) (WebGL ugrađen u običnu stranu)
 - [CSS 3d geometrija](http://skolakoda.org/ucimo-3d-sajtove/25-css-geometrija) (bez WebGL-a)
-- [Frejm](http://skolakoda.org/ucimo-3d-sajtove/30-frejm/) (sa kontrolama i podom)
-- [Frejmovi](http://skolakoda.org/ucimo-3d-sajtove/35-frejmovi/) (bez kontrola i poda)
-- [Frejmovi](http://skolakoda.org/ucimo-3d-sajtove/38-frejmovi-pod/) (sa kontrolama i podom)
+- [Strana u frejmu](http://skolakoda.org/ucimo-3d-sajtove/30-frejm/) (sa kontrolama i podom)
+- [Strane u frejmovima](http://skolakoda.org/ucimo-3d-sajtove/35-frejmovi/) (bez kontrola i poda)
+- [Strane u frejmovima](http://skolakoda.org/ucimo-3d-sajtove/38-frejmovi-pod/) (sa kontrolama i podom)
 - [Galerija](http://skolakoda.org/ucimo-3d-sajtove/40-galerija/) (sa kruzenjem kamere)
 - [Video](http://skolakoda.org/ucimo-3d-sajtove/50-video/) (unutar frejma, sa kontrolama)
 
