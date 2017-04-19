@@ -8,12 +8,11 @@ document.body.appendChild(renderer.domElement)
 
 const kamera = new THREE.PerspectiveCamera()
 kamera.position.set(279, 136, 500)
-kamera.lookAt(scena.position)
 
 const kontrole = new THREE.OrbitControls(kamera)
 
-const html3D = new THREE.CSS3DObject(document.querySelector('#page'))
-scena.add(html3D)
+const page3D = new THREE.CSS3DObject(document.querySelector('#page'))
+scena.add(page3D)
 
 /* FUNCTIONS */
 
@@ -24,11 +23,3 @@ function update() {
 }
 
 update()
-
-/* EVENTS */
-
-window.onresize = function() {
-  kamera.aspect = window.innerWidth / window.innerHeight
-  kamera.updateProjectionMatrix()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-}
