@@ -4,16 +4,16 @@ Pravimo 3D sajtove, 3D transformišemo DOM. `Three.js` i `CSS3DRenderer` su nevi
 
 ## Primeri
 
-* [zakrivljen-html](http://skolakoda.org/ucimo-3d-sajtove/10-zakrivljen-html/)
-* [3d-strana](http://skolakoda.org/ucimo-3d-sajtove/15-3d-strana/)
-* [3d-strane](http://skolakoda.org/ucimo-3d-sajtove/18-3d-strane/)
-* [3d-geometrija](http://skolakoda.org/ucimo-3d-sajtove/20-3d-geometrija/)
-* [css-geometrija](http://skolakoda.org/ucimo-3d-sajtove/25-css-geometrija)
-* [frejm](http://skolakoda.org/ucimo-3d-sajtove/30-frejm/)
-* [frejmovi](http://skolakoda.org/ucimo-3d-sajtove/35-frejmovi/)
-* [frejmovi-pod](http://skolakoda.org/ucimo-3d-sajtove/38-frejmovi-pod/)
-* [animacija](http://skolakoda.org/ucimo-3d-sajtove/40-animacija/)
-* [video](http://skolakoda.org/ucimo-3d-sajtove/50-video/)
+- [Zakrivljen HTML](http://skolakoda.org/ucimo-3d-sajtove/10-zakrivljen-html/) (bez kontrola)
+- [3d strana](http://skolakoda.org/ucimo-3d-sajtove/15-3d-strana/) (sa kontrolama)
+- [3d strane](http://skolakoda.org/ucimo-3d-sajtove/18-3d-strane/) (sa kontrolama)
+- [3d geometrija](http://skolakoda.org/ucimo-3d-sajtove/20-3d-geometrija/) (WebGL ugrađen u običnu stranu)
+- [CSS 3d geometrija](http://skolakoda.org/ucimo-3d-sajtove/25-css-geometrija) (bez WebGL-a)
+- [Frejm](http://skolakoda.org/ucimo-3d-sajtove/30-frejm/) (sa kontrolama i podom)
+- [Frejmovi](http://skolakoda.org/ucimo-3d-sajtove/35-frejmovi/) (bez kontrola i poda)
+- [Frejmovi](http://skolakoda.org/ucimo-3d-sajtove/38-frejmovi-pod/) (sa kontrolama i podom)
+- [Galerija](http://skolakoda.org/ucimo-3d-sajtove/40-galerija/) (sa kruzenjem kamere)
+- [Video](http://skolakoda.org/ucimo-3d-sajtove/50-video/) (unutar frejma, sa kontrolama)
 
 ## Dokumentacija
 
