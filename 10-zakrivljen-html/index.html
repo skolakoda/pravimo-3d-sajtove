@@ -9,7 +9,6 @@
 
   <script src="http://threejs.org/build/three.min.js"></script>
   <script src="http://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
-  <script src="http://threejs.org/examples/js/controls/OrbitControls.js"></script>
 </head>
 
 <body>
@@ -17,7 +16,9 @@
     <h1>Škola koda</h1>
   </header>
 
-  <section class="container" id="root">
+  <div id="renderer"></div>
+
+  <section class="container" id="main">
     <div id="intro" class="well text-center">
       <h1>Škola koda 3D</h1>
       <h2>Učimo narod programiranju!</h2>
@@ -80,6 +81,10 @@
       </div>
     </div>
   </section>
+
+  <footer class="container">
+    <p>© Škola koda, učimo narod programiranju!</p>
+  </footer>
 
   <script src="main.js"></script>
 </body>
