@@ -10,7 +10,7 @@ Pogledaj šta je sve moguće napraviti:
 - [3d strana](http://skolakoda.org/pravimo-3d-sajtove/15-3d-strana/) (sa kontrolama)
 - [3d strane](http://skolakoda.org/pravimo-3d-sajtove/18-3d-strane/) (sa kontrolama)
 - [3d geometrija](http://skolakoda.org/pravimo-3d-sajtove/20-3d-geometrija/) (3d predmeti ugrađeni u običnu stranu)
-- [CSS 3d geometrija](http://skolakoda.org/pravimo-3d-sajtove/25-css-geometrija) (3d predmeti napravljeni samo sa CSS-om)
+- [CSS 3d geometrija](http://skolakoda.org/pravimo-3d-sajtove/25-css-geometrija) (3d predmeti napravljeni sa CSS-om)
 - [Strana u frejmu](http://skolakoda.org/pravimo-3d-sajtove/30-frejm/) (sa kontrolama i podom)
 - [Strane u frejmovima](http://skolakoda.org/pravimo-3d-sajtove/35-frejmovi/) (bez kontrola i poda)
 - [Strane u frejmovima](http://skolakoda.org/pravimo-3d-sajtove/38-frejmovi-pod/) (sa kontrolama i podom)
