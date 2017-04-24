@@ -6,16 +6,16 @@ Pravimo 3D sajtove uz pomoć `Three.js` biblioteke i `CSS3DRenderer`-a.
 
 Pogledaj šta je sve moguće napraviti:
 
-- [Zakrivljena stranica](http://skolakoda.org/ucimo-3d-sajtove/10-zakrivljen-html/)
-- [3d strana](http://skolakoda.org/ucimo-3d-sajtove/15-3d-strana/) (sa kontrolama)
-- [3d strane](http://skolakoda.org/ucimo-3d-sajtove/18-3d-strane/) (sa kontrolama)
-- [3d geometrija](http://skolakoda.org/ucimo-3d-sajtove/20-3d-geometrija/) (WebGL ugrađen u običnu stranu)
-- [CSS 3d geometrija](http://skolakoda.org/ucimo-3d-sajtove/25-css-geometrija) (bez WebGL-a)
-- [Strana u frejmu](http://skolakoda.org/ucimo-3d-sajtove/30-frejm/) (sa kontrolama i podom)
-- [Strane u frejmovima](http://skolakoda.org/ucimo-3d-sajtove/35-frejmovi/) (bez kontrola i poda)
-- [Strane u frejmovima](http://skolakoda.org/ucimo-3d-sajtove/38-frejmovi-pod/) (sa kontrolama i podom)
-- [Galerija](http://skolakoda.org/ucimo-3d-sajtove/40-galerija/) (sa kruzenjem kamere)
-- [Video](http://skolakoda.org/ucimo-3d-sajtove/50-video/) (unutar frejma, sa kontrolama)
+- [Zakrivljena stranica](http://skolakoda.org/pravimo-3d-sajtove/10-zakrivljen-html/)
+- [3d strana](http://skolakoda.org/pravimo-3d-sajtove/15-3d-strana/) (sa kontrolama)
+- [3d strane](http://skolakoda.org/pravimo-3d-sajtove/18-3d-strane/) (sa kontrolama)
+- [3d geometrija](http://skolakoda.org/pravimo-3d-sajtove/20-3d-geometrija/) (WebGL ugrađen u običnu stranu)
+- [CSS 3d geometrija](http://skolakoda.org/pravimo-3d-sajtove/25-css-geometrija) (bez WebGL-a)
+- [Strana u frejmu](http://skolakoda.org/pravimo-3d-sajtove/30-frejm/) (sa kontrolama i podom)
+- [Strane u frejmovima](http://skolakoda.org/pravimo-3d-sajtove/35-frejmovi/) (bez kontrola i poda)
+- [Strane u frejmovima](http://skolakoda.org/pravimo-3d-sajtove/38-frejmovi-pod/) (sa kontrolama i podom)
+- [Galerija](http://skolakoda.org/pravimo-3d-sajtove/40-galerija/) (sa kruzenjem kamere)
+- [Video](http://skolakoda.org/pravimo-3d-sajtove/50-video/) (unutar frejma, sa kontrolama)
 
 ## Dokumentacija
 
