@@ -21,7 +21,7 @@ Pogledaj šta je sve moguće napraviti:
 
 ### Kontrole kamere
 
-Kontrole ubijaju HTML funkcionalnost (ne radi selekcija, input i slično)!
+Važna napomena: dodavanje kontrola kamere ubija HTML funkcionalnost (ne radi selekcija, input i slično)!
 
 ```js
 const kontrole = new THREE.OrbitControls(kamera)
