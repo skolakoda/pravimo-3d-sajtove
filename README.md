@@ -1,10 +1,12 @@
-# Učimo 3D sajtove
+# Pravimo 3D sajtove
 
-Pravimo 3D sajtove, 3D transformišemo DOM, uz pomoć `Three.js` biblioteke i `CSS3DRenderer`-a.
+Pravimo 3D sajtove uz pomoć `Three.js` biblioteke i `CSS3DRenderer`-a.
 
 ## Primeri
 
-- [Zakrivljen HTML](http://skolakoda.org/ucimo-3d-sajtove/10-zakrivljen-html/) (bez kontrola)
+Pogledaj šta je sve moguće napraviti:
+
+- [Zakrivljena stranica](http://skolakoda.org/ucimo-3d-sajtove/10-zakrivljen-html/)
 - [3d strana](http://skolakoda.org/ucimo-3d-sajtove/15-3d-strana/) (sa kontrolama)
 - [3d strane](http://skolakoda.org/ucimo-3d-sajtove/18-3d-strane/) (sa kontrolama)
 - [3d geometrija](http://skolakoda.org/ucimo-3d-sajtove/20-3d-geometrija/) (WebGL ugrađen u običnu stranu)
