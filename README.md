@@ -14,7 +14,7 @@ Pogledaj šta je sve moguće napraviti:
 - [Strana u 3d prostoru](http://skolakoda.org/pravimo-3d-sajtove/30-frejm/) (sa kontrolama i podom)
 - [Strane u 3d prostoru](http://skolakoda.org/pravimo-3d-sajtove/35-frejmovi/) (bez kontrola i poda)
 - [Strane u 3d prostoru](http://skolakoda.org/pravimo-3d-sajtove/38-frejmovi-pod/) (sa kontrolama i podom)
-- [Galerija](http://skolakoda.org/pravimo-3d-sajtove/40-galerija/) (sa kruzenjem kamere)
+- [Foto galerija](http://skolakoda.org/pravimo-3d-sajtove/40-galerija/) (sa kruzenjem kamere)
 - [Video](http://skolakoda.org/pravimo-3d-sajtove/50-video/) (unutar frejma, sa kontrolama)
 
 ## Dokumentacija
